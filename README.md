@@ -1,4 +1,4 @@
-#Final project for Programming I.
+# Final project for Programming I.
 
 **Objective:**
 Create a *Home Inventory* program for an international builder.
