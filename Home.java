@@ -115,7 +115,7 @@ class HomeInventory{
             System.out.println("Enter the address: ");
             String address = keyboard.nextLine();
 
-            System.out.println("Enter the city: ");
+            System.out.println("Enter theA city: ");
             String city = keyboard.nextLine();
 
             System.out.println("Enter the state: ");
