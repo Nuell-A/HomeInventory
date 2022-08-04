@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Scanner;
@@ -17,71 +18,77 @@ class Home {
     private String sale_status;
 
     // Constructor
-    public Home(int sf, String addy, String city, String state, int zc, String model, String status){
-        this.square_feet = sf;
-        this.address = addy;
-        this.city = city;
-        this.state = state;
-        this.zip_code = zc;
-        this.model_name = model;
-        this.sale_status = status;
+    public Home(int sf, String addy, String city, String state, int zc, String model, String status) {
+        try {
+            this.square_feet = sf;
+            this.address = addy;
+            this.city = city;
+            this.state = state;
+            this.zip_code = zc;
+            this.model_name = model;
+            this.sale_status = status;
+
+            System.out.println("Created home successfully.");
+        } catch(Exception e) {
+            System.out.println("Invalid input. Try again.");
+        }
     }
     
     // Getters
-    public int getSquareFeet(){
+    public int getSquareFeet() {
         return this.square_feet;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return this.address;
     }
 
-    public String getCity(){
+    public String getCity() {
         return this.city;
     }
 
-    public String getState(){
+    public String getState() {
         return this.state;
     }
 
-    public int getZipCode(){
+    public int getZipCode() {
         return this.zip_code;
     }
 
-    public String getModelName(){
+    public String getModelName() {
         return this.model_name;
     }
 
-    public String getSaleStatus(){
+    public String getSaleStatus() {
         return this.sale_status;
     }
 
     // Setters
-    public void setSquareFeet(int sf){
+    public void setSquareFeet(int sf) {
         this.square_feet = sf;
     }
 
-    public void setAddress(String addy){
+    public void setAddress(String addy) {
         this.address = addy;
     }
 
-    public void setCity(String city){
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public void setState(String state){
+    public void setState(String state) {
         this.state = state;
     }
 
-    public void setZipCode(int zc){
+    public void setZipCode(int zc) {
         this.zip_code = zc;
     }
 
-    public void setModelName(String model){
+    public void setModelName(String model) {
         this.model_name = model;
     }
 
-    public void setSaleStatus(String status){
+    public void setSaleStatus(String status) {
         this.sale_status = status;
     }
 }
@@ -98,11 +105,11 @@ class HomeInventory{
     public static Scanner keyboard = new Scanner(System.in);
 
     // Constructor to initate ArrayList
-    public HomeInventory(){
+    public HomeInventory() {
         homes = new ArrayList<Home>(); 
     }
 
-    public String addHome(){
+    public String addHome() {
         /*
          * This method gathers info from user about home being added
          * to inventory. If all input is correct, then it is added to the 
@@ -115,7 +122,7 @@ class HomeInventory{
             System.out.println("Enter the address: ");
             String address = keyboard.nextLine();
 
-            System.out.println("Enter theA city: ");
+            System.out.println("Enter the city: ");
             String city = keyboard.nextLine();
 
             System.out.println("Enter the state: ");
@@ -135,33 +142,33 @@ class HomeInventory{
                 throw new Exception("You must have an input value for each prompt!");
             }
 
-            if(city.matches(".*\\d.*") || state.matches(".*\\d.*") || model_name.matches(".*\\d.*") || sale_status.matches(".*\\d.*")){
+            if(city.matches(".*\\d.*") || state.matches(".*\\d.*") || model_name.matches(".*\\d.*") || sale_status.matches(".*\\d.*")) {
                 throw new Exception("Make sure you are putting in the correct information!");
             }
             this.homes.add(new Home(square_feet, address, city, state, zip_code, model_name, sale_status));
             return "Success! Home was added to inventory.";
             
-        } catch(Exception e){
+        } catch(Exception e) {
             // If any user input is incorrect (wrong data type/no input)
             System.out.println(e.getMessage());
             return "Failure.... Home was not added to inventory";
         }
     }
 
-    public String removeHome(){
+    public String removeHome() {
         /*
          * This method takes in the address of the home the user wants removed from the inventory. 
          * It checks to see if the address given is in the inventory and if it is, then it removes it
          * if not then it lets the user know that the address does not exsist.
          */
-        try{
+        try {
             System.out.println("Please enter the address of the home you want to remove from inventory:");
             String rm_addy = keyboard.nextLine();
             // Flag set for home (if it is inventory or not)
             boolean addy_exsists = false;
 
             // for loop to iterate over list of homes
-            for(Home home: this.homes){
+            for(Home home: this.homes) {
                 if (home.getAddress().equals(rm_addy)){
                     // If address is in inventory then flag is set to true
                     addy_exsists = true;
@@ -169,19 +176,19 @@ class HomeInventory{
                     this.homes.remove(home);
                 }
             }
-            if(addy_exsists == true){
+            if(addy_exsists == true) {
                 return "Success! The home was removed from inventory";
             }
-            else{
+            else {
                 return "This address is not in our records";
             }
-        } catch (ConcurrentModificationException e){
+        } catch (ConcurrentModificationException e) {
             // This exception occurs when an ArrayList is modified while being iterated over. 
             // However, the program still works as intended, this is why the return message in a catch
             // block is a success. 
             return "Success... home removed!";
         } 
-        catch(Exception e){
+        catch(Exception e) {
             return "Invalid input provided. Inventory was not changed.";
         }
     }
@@ -194,6 +201,7 @@ class HomeInventory{
         try {
             System.out.println("Enter the address of the home you want to update");
             String addy = keyboard.nextLine();
+            boolean exsists = false;
 
             for(Home home: this.homes) {
                 if(home.getAddress().equals(addy)) {
@@ -224,11 +232,37 @@ class HomeInventory{
                     System.out.println("Enter the sale status: ");
                     String sale_status = keyboard.nextLine();
                     home.setSaleStatus(sale_status);
+                    exsists = true;
                 }
             }
-            return "Success! Home has been updated.";
+            if(exsists == true) {
+                return "Success! Home has been updated.";            
+            }
+            else {
+                return "This address is not in our records";
+            }
         } catch(Exception e) {
             return "Failure... invalid input. Home not updated";
+        }
+    }
+
+    public String printFile(String path) {
+        /*
+         * Takes the path taken from the Main class and write all the homes
+         * currently in the ArrayList to the file for the given path.
+         */
+        try {
+            FileWriter myWriter = new FileWriter(path);
+            myWriter.write(String.format("\n%15s %15s %15s %15s %15s %15s %15s", "Square Feet", "Address", "City", "State", "Zip Code", "Model", "Sale Status"));
+            
+            for(Home home: this.homes) {
+                myWriter.write(String.format("\n%15s %15s %15s %15s %15s %15s %15s", home.getSquareFeet(), home.getAddress(), home.getCity(), home.getState(), home.getZipCode(), home.getModelName(), home.getSaleStatus()));
+            }
+            myWriter.close();
+
+            return "File successfuly printed to computer";
+        } catch (Exception e) {
+            return "Failure.... double check your path to make sure it is correct";
         }
     }
 
