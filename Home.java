@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Scanner;
 
 class Home {
@@ -108,11 +109,8 @@ class HomeInventory{
          * ArrayList.
          */
         try{
-            int square_feet = 0;
-            int zip_code = 0;
-            System.out.println("Enter the square footage: ");
-            square_feet = keyboard.nextInt();
-            keyboard.nextLine();
+            System.out.println("\nEnter the square footage: ");
+            int square_feet = Integer.parseInt(keyboard.nextLine());
 
             System.out.println("Enter the address: ");
             String address = keyboard.nextLine();
@@ -124,8 +122,7 @@ class HomeInventory{
             String state = keyboard.nextLine();
 
             System.out.println("Enter the zip code: ");
-            zip_code = keyboard.nextInt();
-            keyboard.nextLine();
+            int zip_code = Integer.parseInt(keyboard.nextLine());
 
             System.out.println("Enter the model name: ");
             String model_name = keyboard.nextLine();
@@ -160,11 +157,75 @@ class HomeInventory{
         try{
             System.out.println("Please enter the address of the home you want to remove from inventory:");
             String rm_addy = keyboard.nextLine();
-
+            // Flag set for home (if it is inventory or not)
             boolean addy_exsists = false;
 
-        } // ------------------------------------------------STOPPED WORKING HERE
-        // CONTINUE TO FINISH REMOVEHOME() (FOR LOOP TO CHECK IF ADDRESS EXISTS AND OTHER STUFF)
+            // for loop to iterate over list of homes
+            for(Home home: this.homes){
+                if (home.getAddress().equals(rm_addy)){
+                    // If address is in inventory then flag is set to true
+                    addy_exsists = true;
+                    // Removes home from ArrayList 
+                    this.homes.remove(home);
+                }
+            }
+            if(addy_exsists == true){
+                return "Success! The home was removed from inventory";
+            }
+            else{
+                return "This address is not in our records";
+            }
+        } catch (ConcurrentModificationException e){
+            // This exception occurs when an ArrayList is modified while being iterated over. 
+            // However, the program still works as intended, this is why the return message in a catch
+            // block is a success. 
+            return "Success... home removed!";
+        } 
+        catch(Exception e){
+            return "Invalid input provided. Inventory was not changed.";
+        }
+    }
+
+    public String updateHome() {
+        try {
+            System.out.println("Enter the address of the home you want to update");
+            String addy = keyboard.nextLine();
+
+            for(Home home: this.homes) {
+                if(home.getAddress().equals(addy)) {
+                    System.out.println("Enter the square footage: ");
+                    int square_feet = Integer.parseInt(keyboard.nextLine());
+                    home.setSquareFeet(square_feet);;
+
+                    System.out.println("Enter the address: ");
+                    String address = keyboard.nextLine();
+                    home.setAddress(address);
+
+                    System.out.println("Enter the city: ");
+                    String city = keyboard.nextLine();
+                    home.setCity(city);
+
+                    System.out.println("Enter the state: ");
+                    String state = keyboard.nextLine();
+                    home.setState(state);
+
+                    System.out.println("Enter the zip code: ");
+                    int zip_code = Integer.parseInt(keyboard.nextLine());
+                    home.setZipCode(zip_code);
+
+                    System.out.println("Enter the model name: ");
+                    String model_name = keyboard.nextLine();
+                    home.setModelName(model_name);
+
+                    System.out.println("Enter the sale status: ");
+                    String sale_status = keyboard.nextLine();
+                    home.setSaleStatus(sale_status);
+                }
+            }
+            return "Success! Home has been updated.";
+        } catch(Exception e) {
+            return "Failure... invalid input. Home not updated";
+        }
     }
 
     public void displayHomes() {
