@@ -187,6 +187,10 @@ class HomeInventory{
     }
 
     public String updateHome() {
+        /*
+         * This method accepts input from user for an address and tries to find a match in each Home in the
+         * homes list. If one is found, then the user is prompted for new values to be set using the setters.
+         */
         try {
             System.out.println("Enter the address of the home you want to update");
             String addy = keyboard.nextLine();
