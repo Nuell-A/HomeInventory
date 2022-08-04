@@ -56,7 +56,6 @@ public class Main {
 
                     System.out.println("\nExiting program.....");
                 default:
-                    System.out.println("Invalid choice! Try again");
                     break;
             }
 
