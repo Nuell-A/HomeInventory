@@ -151,7 +151,7 @@ class HomeInventory{
         } catch(Exception e) {
             // If any user input is incorrect (wrong data type/no input)
             System.out.println(e.getMessage());
-            return "Failure.... Home was not added to inventory";
+            return "\nFailure.... Home was not added to inventory";
         }
     }
 
@@ -189,7 +189,7 @@ class HomeInventory{
             return "Success... home removed!";
         } 
         catch(Exception e) {
-            return "Invalid input provided. Inventory was not changed.";
+            return "\nInvalid input provided. Inventory was not changed.";
         }
     }
 
@@ -239,10 +239,10 @@ class HomeInventory{
                 return "Success! Home has been updated.";            
             }
             else {
-                return "This address is not in our records";
+                return "\nThis address is not in our records.";
             }
         } catch(Exception e) {
-            return "Failure... invalid input. Home not updated";
+            return "\nFailure... invalid input. Home not updated.";
         }
     }
 
@@ -262,7 +262,7 @@ class HomeInventory{
 
             return "File successfuly printed to computer";
         } catch (Exception e) {
-            return "Failure.... double check your path to make sure it is correct";
+            return "\nFailure.... double check your path to make sure it is correct";
         }
     }
 

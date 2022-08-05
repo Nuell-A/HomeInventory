@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         boolean active = true; // boolean to keep while loop active
-
+        
         HomeInventory inventory = new HomeInventory();
 
         System.out.println("Iventory Initialized!");
