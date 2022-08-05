@@ -253,10 +253,10 @@ class HomeInventory{
          */
         try {
             FileWriter myWriter = new FileWriter(path);
-            myWriter.write(String.format("\n%15s %15s %15s %15s %15s %15s %15s", "Square Feet", "Address", "City", "State", "Zip Code", "Model", "Sale Status"));
+            myWriter.write(String.format("\n%15s %22s %15s %10s %15s %15s %15s", "Square Feet", "Address", "City", "State", "Zip Code", "Model", "Sale Status"));
             
             for(Home home: this.homes) {
-                myWriter.write(String.format("\n%15s %15s %15s %15s %15s %15s %15s", home.getSquareFeet(), home.getAddress(), home.getCity(), home.getState(), home.getZipCode(), home.getModelName(), home.getSaleStatus()));
+                myWriter.write(String.format("\n%15s %22s %15s %10s %15s %15s %15s", home.getSquareFeet(), home.getAddress(), home.getCity(), home.getState(), home.getZipCode(), home.getModelName(), home.getSaleStatus()));
             }
             myWriter.close();
 
@@ -272,11 +272,11 @@ class HomeInventory{
          * Formatted to be more readable.
          */
         System.out.println("The inventory holds the following homes:");
-        System.out.printf("\n%15s %15s %15s %15s %15s %15s %15s", "Square Feet", "Address", "City", "State", "Zip Code", "Model", "Sale Status");
+        System.out.printf("\n%15s %22s %15s %10s %15s %15s %15s", "Square Feet", "Address", "City", "State", "Zip Code", "Model", "Sale Status");
 
         // Iterate over ArrayList containing all homes.
         for(Home home: this.homes){
-            System.out.printf("\n%15s %15s %15s %15s %15s %15s %15s", home.getSquareFeet(), home.getAddress(), home.getCity(), home.getState(), home.getZipCode(), home.getModelName(), home.getSaleStatus());
+            System.out.printf("\n%15s %22s %15s %10s %15s %15s %15s", home.getSquareFeet(), home.getAddress(), home.getCity(), home.getState(), home.getZipCode(), home.getModelName(), home.getSaleStatus());
 
         }
     }
