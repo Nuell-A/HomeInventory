@@ -28,11 +28,11 @@ public class Main {
                 System.out.println("-------------------\n");
                 int choice = Integer.parseInt(keyboard.nextLine());
 
-                if(choice > 5) {
+                if(choice > 5) { // Makes sure choice is within options range.
                     throw new Exception("\nInvalid option! Try again.");
                 }
 
-                switch(choice) {
+                switch(choice) { // Finds and calls the method that user is looking for.
                     case 1:
                         System.out.println(inventory.addHome());
                         break;
@@ -53,6 +53,8 @@ public class Main {
                             System.out.println("Where would you want the file printed? (ENTER PATH)");
                             String filePath = keyboard.nextLine();
                             System.out.println(inventory.printFile(filePath));
+                        } else {
+                            System.out.println("File will not be printed.");
                         }
                         keyboard.close();
                         active = false;
