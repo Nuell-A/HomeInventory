@@ -1,0 +1,3 @@
+
+    Square Feet                Address            City      State        Zip Code           Model     Sale Status
+           1230                 123 st       las vegas         nv           88888       home sale       available
